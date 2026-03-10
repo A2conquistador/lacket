@@ -1,0 +1,527 @@
+{
+    "port": 3000,
+    "verbose": true,
+    "frontend": "proxy",
+    "security": {
+        "verification": false,
+        "alt_creation": true
+    },
+    "backup": {
+        "enabled": true,
+        "interval": 288000000,
+        "path": "backups"
+    },
+    "game": {
+        "name": "Lacket",
+        "welcome": "Hello there",
+        "description": "welcome to lacket this is ran by Solaris",
+        "pronunciation": "Lack-it",
+        "discord": "S4tq7etB",
+        "rewards": [
+            500,
+            550,
+            600,
+            650,
+            700,
+            800,
+            900,
+            1000
+        ],
+        "experience": 0.75,
+        "pages": {
+            "Stats": {
+                "link": "/stats",
+                "icon": "fas fa-chart-column",
+                "location": "left",
+                "permisson": null
+            },
+            "Leaderboard": {
+                "link": "/leaderboard",
+                "icon": "fas fa-trophy",
+                "location": "left",
+                "permisson": null
+            },
+            "Chat": {
+                "link": null,
+                "icon": "fas fa-comments",
+                "location": "left",
+                "permisson": null
+            },
+            "Clans": {
+                "link": "/clans",
+                "icon": "fas fa-swords",
+                "location": "left",
+                "permisson": null
+            },
+            "Market": {
+                "link": "/market",
+                "icon": "fas fa-store",
+                "location": "left",
+                "permisson": null
+            },
+            "Blooks": {
+                "link": "/blooks",
+                "icon": "fas fa-suitcase",
+                "location": "left",
+                "permisson": null
+            },
+            "Bazaar": {
+                "link": "/bazaar",
+                "icon": "fas fa-gavel",
+                "location": "left",
+                "permisson": null
+            },
+            "Inventory": {
+                "link": "/inventory",
+                "icon": "fas fa-box",
+                "location": "left",
+                "permisson": null
+            },
+            "Settings": {
+                "link": "/settings",
+                "icon": "fas fa-cog",
+                "location": "left",
+                "permisson": null
+            },
+            "News": {
+                "link": null,
+                "icon": "fas fa-newspaper",
+                "location": "left",
+                "permisson": null
+            },
+            "Credits": {
+                "link": "/credits",
+                "icon": "fas fa-user",
+                "location": "bottom",
+                "permisson": null
+            },
+            "Discord": {
+                "link": "/discord",
+                "icon": "fab fa-discord",
+                "location": "bottom",
+                "permisson": null
+            },
+            "GitHub": {
+                "link": "https://github.com/XOTlC/Blacket",
+                "icon": "fab fa-github",
+                "location": "bottom",
+                "permisson": null
+            },
+            "YouTube": {
+                "link": "https://www.youtube.com/channel/UCgiSMBsgq954SX5JT7_Lm2g",
+                "icon": "fab fa-youtube",
+                "location": "bottom",
+                "permisson": null
+            },
+            "X": {
+                "link": "https://x.com/XoticBlacket",
+                "icon": "fab fa-twitter-x",
+                "location": "bottom",
+                "permisson": null
+            }
+        },
+        "reports": {
+            "user": {
+                "Harassment": [
+                    "Using vulgar or offensive language",
+                    "Hating based on monetary status or identity",
+                    "Threatening violence or real world harm",
+                    "Encouraging others to self-harm",
+                    "Exposing private information"
+                ],
+                "Miscellaneous": [
+                    "This user is under the age of 13",
+                    "Ban evading or using alternative accounts",
+                    "Impersonating a user"
+                ]
+            },
+            "message": {
+                "Spam": [],
+                "Harassment": [
+                    "Using vulgar or offensive language",
+                    "Hating based on monetary status or identity",
+                    "Threatening violence or real world harm",
+                    "Encouraging others to self-harm",
+                    "Exposing private information"
+                ],
+                "Sexual Content": [
+                    "Gore, animal cruelty, or shock content",
+                    "Sexual content involving a minor",
+                    "Adult sexual content",
+                    "Sexual messages"
+                ],
+                "Miscellaneous": [
+                    "This user is under the age of 13",
+                    "Ban evading or using alternative accounts",
+                    "Impersonating a user"
+                ]
+            }
+        },
+        "chat": {
+            "tokens": 10,
+            "exp": 20,
+            "cooldown": 1
+        },
+        "packs": {
+            "Starter Pack": {
+                "price": 50,
+                "color1": "#3b9eff",
+                "color2": "#6366f1",
+                "blooks": {
+                    "Default.png": {
+                        "rarity": "Common"
+                    },
+                    "Rookie.png": {
+                        "rarity": "Common"
+                    },
+                    "Cadet.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Scout.png": {
+                        "rarity": "Rare"
+                    },
+                    "Elite.png": {
+                        "rarity": "Epic"
+                    }
+                }
+            },
+            "Animal Pack": {
+                "price": 75,
+                "color1": "#22c55e",
+                "color2": "#15803d",
+                "blooks": {
+                    "Cat.png": {
+                        "rarity": "Common"
+                    },
+                    "Dog.png": {
+                        "rarity": "Common"
+                    },
+                    "Fox.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Wolf.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Bear.png": {
+                        "rarity": "Rare"
+                    },
+                    "Tiger.png": {
+                        "rarity": "Rare"
+                    },
+                    "Lion.png": {
+                        "rarity": "Epic"
+                    },
+                    "Dragon.png": {
+                        "rarity": "Legendary"
+                    }
+                }
+            },
+            "Ocean Pack": {
+                "price": 75,
+                "color1": "#0ea5e9",
+                "color2": "#0369a1",
+                "blooks": {
+                    "Fish.png": {
+                        "rarity": "Common"
+                    },
+                    "Crab.png": {
+                        "rarity": "Common"
+                    },
+                    "Octopus.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Shark.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Dolphin.png": {
+                        "rarity": "Rare"
+                    },
+                    "Whale.png": {
+                        "rarity": "Rare"
+                    },
+                    "Narwhal.png": {
+                        "rarity": "Epic"
+                    },
+                    "Kraken.png": {
+                        "rarity": "Legendary"
+                    }
+                }
+            },
+            "Space Pack": {
+                "price": 100,
+                "color1": "#8b5cf6",
+                "color2": "#4c1d95",
+                "blooks": {
+                    "Astronaut.png": {
+                        "rarity": "Common"
+                    },
+                    "Alien.png": {
+                        "rarity": "Common"
+                    },
+                    "Robot.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "UFO.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Rocket.png": {
+                        "rarity": "Rare"
+                    },
+                    "Satellite.png": {
+                        "rarity": "Rare"
+                    },
+                    "BlackHole.png": {
+                        "rarity": "Epic"
+                    },
+                    "Nebula.png": {
+                        "rarity": "Legendary"
+                    },
+                    "Celestial.png": {
+                        "rarity": "Mythic"
+                    }
+                }
+            },
+            "Food Pack": {
+                "price": 75,
+                "color1": "#f59e0b",
+                "color2": "#b45309",
+                "blooks": {
+                    "Pizza.png": {
+                        "rarity": "Common"
+                    },
+                    "Burger.png": {
+                        "rarity": "Common"
+                    },
+                    "Taco.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Sushi.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "IceCream.png": {
+                        "rarity": "Rare"
+                    },
+                    "Donut.png": {
+                        "rarity": "Rare"
+                    },
+                    "Cookie.png": {
+                        "rarity": "Epic"
+                    },
+                    "GoldenApple.png": {
+                        "rarity": "Legendary"
+                    }
+                }
+            },
+            "Medieval Pack": {
+                "price": 100,
+                "color1": "#a16207",
+                "color2": "#713f12",
+                "blooks": {
+                    "Knight.png": {
+                        "rarity": "Common"
+                    },
+                    "Archer.png": {
+                        "rarity": "Common"
+                    },
+                    "Wizard.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "King.png": {
+                        "rarity": "Rare"
+                    },
+                    "Queen.png": {
+                        "rarity": "Rare"
+                    },
+                    "Paladin.png": {
+                        "rarity": "Epic"
+                    },
+                    "DragonKing.png": {
+                        "rarity": "Legendary"
+                    },
+                    "HolyKnight.png": {
+                        "rarity": "Mythic"
+                    }
+                }
+            },
+            "Horror Pack": {
+                "price": 150,
+                "color1": "#991b1b",
+                "color2": "#450a0a",
+                "blooks": {
+                    "Ghost.png": {
+                        "rarity": "Common"
+                    },
+                    "Zombie.png": {
+                        "rarity": "Common"
+                    },
+                    "Vampire.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Werewolf.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Witch.png": {
+                        "rarity": "Rare"
+                    },
+                    "Demon.png": {
+                        "rarity": "Epic"
+                    },
+                    "Reaper.png": {
+                        "rarity": "Legendary"
+                    },
+                    "DevilKing.png": {
+                        "rarity": "Mythic"
+                    }
+                }
+            },
+            "Nature Pack": {
+                "price": 75,
+                "color1": "#16a34a",
+                "color2": "#14532d",
+                "blooks": {
+                    "Tree.png": {
+                        "rarity": "Common"
+                    },
+                    "Flower.png": {
+                        "rarity": "Common"
+                    },
+                    "Mushroom.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Cactus.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Sunflower.png": {
+                        "rarity": "Rare"
+                    },
+                    "RainbowFlower.png": {
+                        "rarity": "Epic"
+                    },
+                    "WorldTree.png": {
+                        "rarity": "Legendary"
+                    },
+                    "NatureGod.png": {
+                        "rarity": "Mythic"
+                    }
+                }
+            },
+            "Weather Pack": {
+                "price": 100,
+                "color1": "#38bdf8",
+                "color2": "#0c4a6e",
+                "blooks": {
+                    "Cloud.png": {
+                        "rarity": "Common"
+                    },
+                    "Rain.png": {
+                        "rarity": "Common"
+                    },
+                    "Snow.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Thunder.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Rainbow.png": {
+                        "rarity": "Rare"
+                    },
+                    "Tornado.png": {
+                        "rarity": "Rare"
+                    },
+                    "Blizzard.png": {
+                        "rarity": "Epic"
+                    },
+                    "StormGod.png": {
+                        "rarity": "Legendary"
+                    }
+                }
+            },
+            "Mystery Pack": {
+                "price": 200,
+                "color1": "#c026d3",
+                "color2": "#701a75",
+                "blooks": {
+                    "Error.png": {
+                        "rarity": "Common"
+                    },
+                    "Info.png": {
+                        "rarity": "Uncommon"
+                    },
+                    "Loading.png": {
+                        "rarity": "Rare"
+                    },
+                    "Question.png": {
+                        "rarity": "Rare"
+                    },
+                    "Shadow.png": {
+                        "rarity": "Epic"
+                    },
+                    "Void.png": {
+                        "rarity": "Legendary"
+                    },
+                    "Glitch.png": {
+                        "rarity": "Mythic"
+                    },
+                    "Omnipotent.png": {
+                        "rarity": "Chroma"
+                    }
+                }
+            },
+            "Legend Pack": {
+                "price": 500,
+                "color1": "#f59e0b",
+                "color2": "#92400e",
+                "blooks": {
+                    "Phoenix.png": {
+                        "rarity": "Epic"
+                    },
+                    "Leviathan.png": {
+                        "rarity": "Legendary"
+                    },
+                    "Titan.png": {
+                        "rarity": "Legendary"
+                    },
+                    "Celestial.png": {
+                        "rarity": "Mythic"
+                    },
+                    "GodSlayer.png": {
+                        "rarity": "Chroma"
+                    }
+                }
+            }
+        },
+        "dev_blooks": [
+            "Console.gif"
+        ],
+        "rarities": {
+            "Common": {
+                "color": "#9ca3af",
+                "chance": 70
+            },
+            "Uncommon": {
+                "color": "#22c55e",
+                "chance": 20
+            },
+            "Rare": {
+                "color": "#3b9eff",
+                "chance": 7
+            },
+            "Epic": {
+                "color": "#a855f7",
+                "chance": 2
+            },
+            "Legendary": {
+                "color": "#f59e0b",
+                "chance": 0.8
+            },
+            "Mythic": {
+                "color": "#ef4444",
+                "chance": 0.18
+            },
+            "Chroma": {
+                "color": "#ec4899",
+                "chance": 0.02
+            }
+        }
+    }
+}

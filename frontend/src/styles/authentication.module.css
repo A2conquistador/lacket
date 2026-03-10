@@ -1,0 +1,229 @@
+.outerContainer {
+    left: 0;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #0d1525;
+}
+
+.mainheader {
+    background-color: rgba(8,12,30,0.95);
+    border-bottom: 1px solid rgba(80,160,255,0.15);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    justify-content: space-between;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.blacketText {
+    color: #dce8ff;
+    cursor: pointer;
+    font-family: Titan One, sans-serif;
+    font-size: 32px;
+    line-height: 55px;
+    margin-left: 30px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.headerRight {
+    color: #6b82aa;
+    cursor: pointer;
+    font-family: Nunito, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 55px;
+    padding-right: 30px;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.headerRight:hover {
+    color: #3b9eff;
+}
+
+.regularBody {
+    height: calc(100% - 55px);
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 55px;
+    width: 100%;
+}
+
+.floatingBox {
+    background-color: rgba(10,16,36,0.9);
+    border: 1px solid rgba(80,160,255,0.15);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    max-width: 420px;
+    padding-bottom: 24px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.floatingBoxHeader {
+    color: #dce8ff;
+    font-family: Titan One, sans-serif;
+    font-size: 48px;
+    margin: 24px 20px 20px;
+    text-align: center;
+}
+
+.smallFloatingBoxHeader {
+    color: #dce8ff;
+    font-family: Titan One, sans-serif;
+    font-size: 42px;
+    margin: 24px 20px 20px;
+    text-align: center;
+}
+
+.inputContainer {
+    align-items: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(80,160,255,0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    height: 48px;
+    margin: auto auto 12px;
+    max-width: 330px;
+    width: 80%;
+    transition: border-color 0.15s;
+}
+
+.inputContainer:focus-within {
+    border-color: #3b9eff;
+}
+
+.inputError {
+    border-color: #ce1313 !important;
+}
+
+.icon {
+    align-items: center;
+    color: #6b82aa;
+    display: flex;
+    font-size: 18px;
+    height: 48px;
+    justify-content: center;
+    min-width: 22px;
+    padding-left: 14px;
+    user-select: none;
+    width: 22px;
+}
+
+.smallerIcon {
+    min-width: 20px;
+    padding-left: 15px;
+    width: 20px;
+}
+
+.iconError {
+    color: #ce1313;
+}
+
+.input {
+    border: none;
+    background-color: transparent;
+    color: #dce8ff;
+    font-family: Nunito, sans-serif;
+    font-size: 15px;
+    height: 35px;
+    margin: 5px 2px 5px 11px;
+    outline: none;
+    width: calc(100% - 35px);
+}
+
+.input::placeholder {
+    color: #3d5070;
+}
+
+.button {
+    background: linear-gradient(135deg, #1a3a6e, #0f2550);
+    border: 1px solid rgba(59,158,255,0.3);
+    border-radius: 10px;
+    color: #dce8ff;
+    cursor: pointer;
+    display: block;
+    font-family: Nunito, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 48px;
+    margin: 8px auto 16px;
+    max-width: 330px;
+    outline: none;
+    transition: all 0.18s ease;
+    width: 80%;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #1e4a8a, #122e63);
+    border-color: #3b9eff;
+    color: #fff;
+}
+
+.buttonError {
+    border-color: #ce1313;
+    color: #ce1313;
+}
+
+.switchAuthTypeLink {
+    font-family: Nunito, sans-serif;
+    font-size: 13px;
+    color: #6b82aa;
+    margin: 8px auto;
+    text-align: center;
+}
+
+.switchAuthTypeLink a {
+    color: #3b9eff !important;
+    cursor: pointer;
+    text-decoration: underline;
+    user-select: none;
+}
+
+.blErrorContainer {
+    align-items: center;
+    background: rgba(206,19,19,0.1);
+    border: 1px solid rgba(206,19,19,0.4);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    margin: auto auto 14px;
+    max-width: 330px;
+    width: 80%;
+}
+
+.blErrorIcon {
+    color: #ce1313;
+    margin: 10px 12px;
+    min-width: 16px;
+    width: 16px;
+}
+
+.blErrorText {
+    color: #f87171;
+    font-family: Nunito, sans-serif;
+    font-size: 14px;
+    margin: 8px 5px;
+    text-align: left;
+}

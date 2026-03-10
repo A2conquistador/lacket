@@ -1,0 +1,177 @@
+.headerContainer {
+    height: 100vh;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1
+}
+
+.headerImage {
+    bottom: 0;
+    height: 90%;
+    max-height: 700px;
+    position: absolute;
+    right: 0;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.headerSide {
+    background: linear-gradient(90deg, #000040 60%, transparent);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 70%
+}
+
+.topHeaderContainer {
+    left: 40px;
+    position: absolute;
+    top: 20px
+}
+
+.logoText {
+    color: #fff;
+    font-family: Titan One, sans-serif;
+    font-size: 50px;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.welcomeContainer {
+    bottom: 60px;
+    left: 40px;
+    position: absolute
+}
+
+.welcomeText {
+    color: #fff;
+    font-family: Titan One, sans-serif;
+    font-size: 60px;
+    line-height: 65px;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.welcomeDesc {
+    color: #fff;
+    font-family: Nunito, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+    max-width: 500px;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.welcomeButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px
+}
+
+.welcomeButton {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-family: Nunito, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    outline: none;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s;
+    width: 200px
+}
+
+.welcomeButton:hover {
+    border-color: #fff;
+    background-color: rgba(255,255,255,0.1)
+}
+
+.pronounceButton {
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    font-family: Nunito, sans-serif;
+    font-size: 16px;
+    margin-top: 15px;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.topButtonContainer {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px
+}
+
+.topButton {
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Nunito, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    outline: none;
+    padding: 8px 20px;
+    text-decoration: none;
+    transition: all .2s
+}
+
+.loginButton {
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff
+}
+
+.loginButton:hover {
+    border-color: #fff
+}
+
+.registerButton {
+    background-color: #fff;
+    border: 2px solid #fff;
+    color: #000040
+}
+
+.registerButton:hover {
+    background-color: rgba(255,255,255,0.9)
+}
+
+.copyrightInformation {
+    bottom: 10px;
+    color: rgba(255,255,255,0.5);
+    font-family: Nunito, sans-serif;
+    font-size: 13px;
+    left: 10px;
+    position: absolute
+}
+
+.versionInformation {
+    bottom: 10px;
+    color: rgba(255,255,255,0.5);
+    font-family: Nunito, sans-serif;
+    font-size: 13px;
+    position: absolute;
+    right: 10px
+}
+
+.termsOfServiceLink {
+    bottom: 30px;
+    color: rgba(255,255,255,0.5);
+    font-family: Nunito, sans-serif;
+    font-size: 13px;
+    position: absolute;
+    right: 10px;
+    text-decoration: underline
+}

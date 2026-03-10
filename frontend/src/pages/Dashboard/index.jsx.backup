@@ -1,0 +1,30 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [page, setPage] = useState('profile');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) { navigate('/login'); return; }
+    fetch('/api/users/me', {headers:{authorization:token}})
+      .then(r => r.json()).then(d => setUser(d))
+      .catch(() => { localStorage.removeItem('token'); navigate('/login'); });
+  }, [navigate]);
+
+  if (!user) return <div style={{color:'#fff',padding:'20px'}}>Loading...</div>;
+
+  return (
+    <div style={{padding:'20px',color:'#fff',background:'#05071a',minHeight:'100vh'}}>
+      <h1>Welcome {user.username}!</h1>
+      <div style={{marginTop:'20px',background:'rgba(99,102,241,0.08)',padding:'20px',borderRadius:'10px'}}>
+        <p>Level: {user.level || 1}</p>
+        <p>XP: {user.exp || 0}</p>
+        <p>Tokens: {user.tokens || 0}</p>
+        <p>Blooks: {(user.blooks || []).length}</p>
+      </div>
+      <button onClick={() => { localStorage.removeItem('token'); navigate('/login'); }} style={{marginTop:'20px',padding:'10px 20px',background:'#ef4444',color:'#fff',border:'none',borderRadius:'5px',cursor:'pointer'}}>Logout</button>
+    </div>
+  );
+}

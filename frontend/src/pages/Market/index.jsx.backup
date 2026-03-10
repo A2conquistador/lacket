@@ -1,0 +1,142 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const PACKS = [
+    { id: 'Animals', name: 'Animals Pack', emoji: '🐾', color: '#f97316', price: 50, desc: 'Dogs, cats, dragons and more!' },
+    { id: 'Space', name: 'Space Pack', emoji: '🚀', color: '#6366f1', price: 50, desc: 'Explore the cosmos!' },
+    { id: 'Food', name: 'Food Pack', emoji: '🍕', color: '#ef4444', price: 50, desc: 'Delicious collectibles!' },
+    { id: 'Medieval', name: 'Medieval Pack', emoji: '⚔️', color: '#6b7280', price: 50, desc: 'Knights, wizards and castles!' },
+    { id: 'Lacket', name: 'Lacket Pack', emoji: '👾', color: '#06b6d4', price: 75, desc: 'Exclusive Lacket blooks!' },
+    { id: 'Nature', name: 'Nature Pack', emoji: '🌿', color: '#22c55e', price: 50, desc: 'Flora and natural wonders!' },
+    { id: 'Sports', name: 'Sports Pack', emoji: '⚽', color: '#f97316', price: 50, desc: 'Champion athlete blooks!' },
+    { id: 'Halloween', name: 'Halloween Pack', emoji: '🎃', color: '#7c3aed', price: 75, desc: 'Spooky scary blooks!' },
+    { id: 'Ocean', name: 'Ocean Pack', emoji: '🌊', color: '#0ea5e9', price: 50, desc: 'Deep sea creatures!' },
+    { id: 'Mythic', name: 'Mythic Pack', emoji: '✨', color: '#f0abfc', price: 100, desc: 'Legendary mythical beings!' },
+];
+
+const RARITY_COLORS = { Common: '#9ca3af', Uncommon: '#22c55e', Rare: '#3b82f6', Epic: '#ec4899', Legendary: '#f59e0b' };
+
+export default function Market() {
+    const navigate = useNavigate();
+    const [tokens, setTokens] = useState(0);
+    const [opening, setOpening] = useState(null);
+    const [result, setResult] = useState(null);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) { navigate('/login'); return; }
+        axios.get('/api/users/me', { headers: { authorization: token } })
+            .then(res => setTokens(res.data.tokens))
+            .catch(() => navigate('/login'));
+    }, []);
+
+const openPack = async (pack) => {
+    console.log('🔵 openPack clicked with:', pack.id);
+    const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
+        if (!token) return navigate('/login');
+        if (tokens < pack.price) return setError('Not enough tokens!');
+        setOpening(pack);
+        setResult(null);
+        setError('');
+        try {
+            const res = await axios.post('/api/buy-pack', { pack: pack.id }, { headers: { authorization: token } });
+            setTokens(res.data.user.tokens);
+            setResult({ blook: res.data.blook, rarity: res.data.rarity, pack });
+        } catch (err) {
+            setError(err?.response?.data?.error || 'Something went wrong');
+            setOpening(null);
+        }
+    };
+
+    const closeResult = () => { setResult(null); setOpening(null); };
+
+    const BLOOK_EMOJIS = {
+        'Dog':'🐶','Cat':'🐱','Rabbit':'🐰','Fox':'🦊','Bear':'🐻','Panda':'🐼','Tiger':'🐯','Lion':'🦁','Elephant':'🐘','Dragon':'🐉',
+        'Rocket':'🚀','Star':'⭐','Moon':'🌙','Alien':'👽','UFO':'🛸','Comet':'☄️','Planet':'🪐','Astronaut':'👨‍🚀','Black Hole':'🌀','Galaxy':'🌌',
+        'Pizza':'🍕','Burger':'🍔','Taco':'🌮','Sushi':'🍣','Ramen':'🍜','Donut':'🍩','Ice Cream':'🍦','Cake':'🎂','Cookie':'🍪','Golden Apple':'🍎',
+        'Knight':'⚔️','Shield':'🛡️','Bow':'🏹','Castle':'🏰','Crown':'👑','Wizard':'🧙','Dragon Egg':'🥚','Sword':'🗡️','Dark Knight':'🖤','Holy Grail':'✨',
+        'Pixel':'🟦','Glitch':'⚡','Byte':'💾','Neon':'🔮','Circuit':'🔌','Bot':'🤖','Hacker':'💻','Virus':'🦠','Matrix':'🧬','God Mode':'👾',
+        'Flower':'🌸','Tree':'🌲','Mushroom':'🍄','Rainbow':'🌈','Tornado':'🌪️','Volcano':'🌋','Crystal':'💎','Aurora':'🌠','Tsunami':'🌊','Phoenix':'🔥',
+        'Soccer':'⚽','Basketball':'🏀','Tennis':'🎾','Football':'🏈','Baseball':'⚾','Trophy':'🏆','Gold Medal':'🥇','Racing Flag':'🏁','Champion':'🎖️','GOAT':'🐐',
+        'Ghost':'👻','Pumpkin':'🎃','Bat':'🦇','Skull':'💀','Spider':'🕷️','Witch':'🧙‍♀️','Vampire':'🧛','Zombie':'🧟','Demon':'😈','Grim Reaper':'☠️',
+        'Fish':'🐟','Crab':'🦀','Octopus':'🐙','Dolphin':'🐬','Shark':'🦈','Turtle':'🐢','Whale':'🐳','Seahorse':'🦄','Kraken':'🦑','Leviathan':'🌊',
+        'Fairy':'🧚','Unicorn':'🦄','Gnome':'🧝','Mermaid':'🧜','Centaur':'🏇','Griffin':'🦅','Chimera':'🔥','Hydra':'🐍','Titan':'⚡','God':'👁️'
+    };
+
+    return (
+        <div style={{minHeight:'100vh',background:'#05071a',color:'#fff',fontFamily:'Nunito,sans-serif',padding:'40px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'40px',maxWidth:'1000px',margin:'0 auto 40px'}}>
+                <div>
+                    <h1 style={{fontFamily:'Titan One,sans-serif',fontSize:'36px',margin:'0 0 4px',color:'#e0e7ff'}}>Market</h1>
+                    <p style={{margin:0,color:'rgba(255,255,255,0.4)',fontSize:'14px'}}>Open packs to collect blooks</p>
+                </div>
+                <div style={{display:'flex',gap:'16px',alignItems:'center'}}>
+                    <div style={{background:'rgba(245,158,11,0.1)',border:'1px solid rgba(245,158,11,0.3)',borderRadius:'12px',padding:'10px 20px',fontSize:'18px',fontWeight:'800',color:'#f59e0b'}}>
+                        🪙 {tokens.toLocaleString()}
+                    </div>
+                    <button onClick={() => navigate('/dashboard')} style={{background:'rgba(99,102,241,0.1)',border:'1px solid rgba(99,102,241,0.3)',borderRadius:'10px',color:'#a5b4fc',fontFamily:'Nunito,sans-serif',fontSize:'14px',fontWeight:'700',padding:'10px 20px',cursor:'pointer'}}>← Dashboard</button>
+                </div>
+            </div>
+
+            {error && <div style={{maxWidth:'1000px',margin:'0 auto 20px',background:'rgba(239,68,68,0.1)',border:'1px solid rgba(239,68,68,0.3)',borderRadius:'12px',padding:'12px 20px',color:'#f87171'}}>{error}</div>}
+
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:'20px',maxWidth:'1000px',margin:'0 auto'}}>
+                {PACKS.map(pack => (
+                    <div key={pack.id} style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'20px',padding:'28px',transition:'all 0.2s'}}>
+                        <div style={{fontSize:'52px',marginBottom:'12px'}}>{pack.emoji}</div>
+                        <div style={{fontFamily:'Titan One,sans-serif',fontSize:'20px',color:'#e0e7ff',marginBottom:'6px'}}>{pack.name}</div>
+                        <div style={{fontSize:'13px',color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>{pack.desc}</div>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.4)'}}>
+                                <span style={{color:'#9ca3af'}}>60%</span> <span style={{color:'#22c55e'}}>25%</span> <span style={{color:'#3b82f6'}}>10%</span> <span style={{color:'#ec4899'}}>4%</span> <span style={{color:'#f59e0b'}}>1%</span>
+                            </div>
+                            <div style={{color:'#f59e0b',fontWeight:'800',fontSize:'18px'}}>🪙 {pack.price}</div>
+                        </div>
+                        <button onClick={() => openPack(pack)} disabled={tokens < pack.price || opening} style={{width:'100%',padding:'12px',background:tokens>=pack.price?'linear-gradient(135deg,'+pack.color+','+pack.color+'99)':'rgba(255,255,255,0.05)',border:'none',borderRadius:'10px',color:tokens>=pack.price?'#fff':'rgba(255,255,255,0.3)',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',cursor:tokens>=pack.price?'pointer':'not-allowed',transition:'all 0.2s'}}>
+                            {tokens < pack.price ? 'Not enough tokens' : 'Open Pack'}
+                        </button>
+                    </div>
+                ))}
+            </div>
+
+            {(opening || result) && (
+                <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.85)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}} onClick={result ? closeResult : undefined}>
+                    <style>{`
+                        @keyframes spin { 0%{transform:rotateY(0deg)} 100%{transform:rotateY(360deg)} }
+                        @keyframes popIn { 0%{transform:scale(0.3);opacity:0} 60%{transform:scale(1.2)} 100%{transform:scale(1);opacity:1} }
+                        @keyframes glow { 0%,100%{box-shadow:0 0 30px currentColor} 50%{box-shadow:0 0 80px currentColor,0 0 120px currentColor} }
+                        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+                        @keyframes particle { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0} }
+                    `}</style>
+                    <div style={{textAlign:'center',maxWidth:'500px',width:'90%'}} onClick={e => e.stopPropagation()}>
+                        {!result ? (
+                            <div>
+                                <div style={{fontSize:'100px',animation:'spin 0.6s linear infinite',display:'inline-block'}}>{opening.emoji}</div>
+                                <div style={{marginTop:'24px',fontFamily:'Titan One,sans-serif',fontSize:'28px',color:'#e0e7ff'}}>Opening {opening.name}...</div>
+                            </div>
+                        ) : (
+                            <div>
+                                <div style={{position:'relative',display:'inline-block'}}>
+                                    {[...Array(12)].map((_,i) => (
+                                        <div key={i} style={{position:'absolute',top:'50%',left:'50%',width:'12px',height:'12px',borderRadius:'50%',background:RARITY_COLORS[result.rarity],animation:'particle 0.8s ease-out forwards','--tx':(Math.cos(i/12*Math.PI*2)*120)+'px','--ty':(Math.sin(i/12*Math.PI*2)*120)+'px',animationDelay:(i*0.05)+'s'}} />
+                                    ))}
+                                    <div style={{fontSize:'120px',animation:'popIn 0.6s cubic-bezier(0.175,0.885,0.32,1.275) forwards, float 2s ease-in-out 0.6s infinite',display:'inline-block',filter:'drop-shadow(0 0 30px '+RARITY_COLORS[result.rarity]+')'}}>{BLOOK_EMOJIS[result.blook] || '❓'}</div>
+                                </div>
+                                <div style={{marginTop:'24px',fontSize:'13px',fontWeight:'800',color:RARITY_COLORS[result.rarity],textTransform:'uppercase',letterSpacing:'3px',animation:'popIn 0.4s 0.3s both'}}>{result.rarity}</div>
+                                <div style={{fontFamily:'Titan One,sans-serif',fontSize:'36px',color:'#e0e7ff',margin:'8px 0',animation:'popIn 0.4s 0.4s both'}}>{result.blook}</div>
+                                <div style={{fontSize:'14px',color:'rgba(255,255,255,0.4)',marginBottom:'32px',animation:'popIn 0.4s 0.5s both'}}>From {result.pack.name}</div>
+                                <div style={{display:'flex',gap:'12px',justifyContent:'center',animation:'popIn 0.4s 0.6s both'}}>
+                                    <button onClick={() => { setResult(null); openPack(result.pack); }} disabled={tokens < result.pack.price} style={{padding:'14px 28px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'12px',color:'#fff',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',cursor:tokens>=result.pack.price?'pointer':'not-allowed',opacity:tokens>=result.pack.price?1:0.5}}>Open Again</button>
+                                    <button onClick={closeResult} style={{padding:'14px 28px',background:'rgba(255,255,255,0.08)',border:'1px solid rgba(255,255,255,0.15)',borderRadius:'12px',color:'#fff',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',cursor:'pointer'}}>Done</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}

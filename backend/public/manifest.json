@@ -1,0 +1,24 @@
+{
+  "_vendor.16cda76d.js": {
+    "file": "vendor.16cda76d.js",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "index.css": {
+    "file": "index.ae22a27f.css",
+    "src": "index.css"
+  },
+  "index.html": {
+    "css": [
+      "index.ae22a27f.css"
+    ],
+    "file": "index.b6f76bd4.js",
+    "imports": [
+      "_vendor.16cda76d.js",
+      "index.html"
+    ],
+    "isEntry": true,
+    "src": "index.html"
+  }
+}

@@ -1,0 +1,11 @@
+// Add this after the leaderboard handler (around line 130)
+
+        {page==='play'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>Play</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Start playing games</p><button onClick={()=>navigate('/play')} style={{padding:'12px 24px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'10px',color:'#fff',fontWeight:'700',cursor:'pointer'}}>Go to Play →</button></div>)}
+
+        {page==='sets'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>My Sets</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Create and manage question sets</p><button onClick={()=>navigate('/sets')} style={{padding:'12px 24px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'10px',color:'#fff',fontWeight:'700',cursor:'pointer'}}>Manage Sets →</button></div>)}
+
+        {page==='discover'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>Discover</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Discover new question sets</p><button onClick={()=>navigate('/discover')} style={{padding:'12px 24px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'10px',color:'#fff',fontWeight:'700',cursor:'pointer'}}>Browse Sets →</button></div>)}
+
+        {page==='chat'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>Chat</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Global chat</p><button onClick={()=>navigate('/chat')} style={{padding:'12px 24px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'10px',color:'#fff',fontWeight:'700',cursor:'pointer'}}>Go to Chat →</button></div>)}
+
+        {page==='friends'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>Friends</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Manage your friends</p><button onClick={()=>navigate('/friends')} style={{padding:'12px 24px',background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'10px',color:'#fff',fontWeight:'700',cursor:'pointer'}}>Go to Friends →</button></div>)}

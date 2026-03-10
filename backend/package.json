@@ -1,0 +1,23 @@
+{
+  "name": "lacket-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "start:crostini": "node lacket-backend-crostini.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.6.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "express-session": "^1.19.0",
+    "http-proxy-middleware": "^3.0.5",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.19.0",
+    "sequelize": "^6.37.7",
+    "ws": "^8.19.0"
+  }
+}
