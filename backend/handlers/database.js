@@ -1,20 +1,24 @@
 import { Sequelize } from "sequelize";
-
 export default async () => {
-    global.database = new Sequelize("blacket", "blacket", "password123", {
-        host: "localhost",
+    const dbName = process.env.MYSQL_DATABASE || process.env.MYSQLDATABASE || "blacket";
+    const dbUser = process.env.MYSQLUSER || "blacket";
+    const dbPass = process.env.MYSQLPASSWORD || process.env.MYSQL_ROOT_PASSWORD || "password123";
+    const dbHost = process.env.MYSQLHOST || "localhost";
+    const dbPort = process.env.MYSQLPORT || 3306;
+
+    global.database = new Sequelize(dbName, dbUser, dbPass, {
+        host: dbHost,
+        port: dbPort,
         logging: global.config.verbose ? console.log : false,
         dialect: "mysql"
     });
 
-    // Ensure the users table has an equipped_blook column (used to store which blook the user has equipped).
     try {
         const [columns] = await global.database.query("SHOW COLUMNS FROM users LIKE 'equipped_blook'");
         if (columns.length === 0) {
             await global.database.query("ALTER TABLE users ADD COLUMN equipped_blook VARCHAR(255) DEFAULT 'Default.png'");
         }
     } catch (err) {
-        // Do not crash if the schema isn't set up yet (e.g. fresh install without users table).
         console.error('[DB] could not ensure equipped_blook column:', err.message || err);
     }
 };
