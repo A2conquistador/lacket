@@ -1,7 +1,7 @@
 export default async (app) => {
-    for (const file of walk("./endpoints")) {
+    for (const file of walk(new URL("../endpoints", import.meta.url).pathname)) {
         if (!file.endsWith(".js")) continue;
-        let endpoint; try { endpoint = (await import("../" + file)).default; } catch(e) { console.error('[IMPORT ERROR]', file, e.message); continue; }
+        let endpoint; try { endpoint = (await import(file)).default; } catch(e) { console.error('[IMPORT ERROR]', file, e.message); continue; }
         if (!endpoint) { console.error('[NO DEFAULT]', file); continue; }
         const path = "/" + file.replace("endpoints", "api").slice(0, -3);
         const method = (endpoint.method || endpoint.type || "get").toLowerCase();

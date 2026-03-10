@@ -1,5 +1,5 @@
 export default async (app) => {
-    const files = Array.from(walk("./middlewares")).filter((file) => file.endsWith(".js"));
+    const files = Array.from(walk(new URL("../middlewares", import.meta.url).pathname)).filter((file) => file.endsWith(".js"));
 
     // Ensure session middleware runs before others so req.session.user is available.
     files.sort((a, b) => {
@@ -9,7 +9,7 @@ export default async (app) => {
     });
 
     for (const file of files) {
-        const middleware = (await import(`../${file}`)).default;
+        const middleware = (await import(file)).default;
         app.use(middleware);
     }
 };
