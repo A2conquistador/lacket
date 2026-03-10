@@ -10,7 +10,9 @@ export default async () => {
         host: dbHost,
         port: dbPort,
         logging: global.config.verbose ? console.log : false,
-        dialect: "mysql"
+        dialect: "mysql",
+        dialectOptions: { socketPath: undefined },
+        pool: { max: 5, min: 0, acquire: 30000, idle: 10000 }
     });
 
     try {
