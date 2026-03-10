@@ -6,7 +6,7 @@ global.blacket = {};
 export default async () => {
     const functions = [];
 
-    for (const file of walk("./functions")) {
+    for (const file of walk(new URL("../../functions", import.meta.url).pathname)) {
         if (!file.endsWith(".js")) continue;
 
         console.log(file);
