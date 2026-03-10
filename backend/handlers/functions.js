@@ -11,7 +11,7 @@ export default async () => {
 
         console.log(file);
 
-        const module = import(`../${file}`).then((module) => module.default);
+        const module = import(file).then((module) => module.default);
 
         functions.push(module);
     }
