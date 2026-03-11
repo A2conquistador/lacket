@@ -4,20 +4,29 @@ export default async () => {
     const dbUser = process.env.MYSQLUSER || "blacket";
     const dbPass = process.env.MYSQLPASSWORD || process.env.MYSQL_ROOT_PASSWORD || "password123";
     const dbHost = process.env.MYSQLHOST || "localhost";
-    const dbPort = process.env.MYSQLPORT || 3306;
-    global.database = new Sequelize(dbName, dbUser, dbPass, {
-        host: dbHost,
-        port: dbPort,
+    const dbPort = parseInt(process.env.MYSQLPORT || 3306);
+    const dbUrl = process.env.MYSQL_URL || process.env.DATABASE_URL || null;
+
+    let sequelizeOpts = {
         logging: global.config.verbose ? console.log : false,
         dialect: "mysql",
         dialectOptions: { ssl: false },
         pool: { max: 5, min: 0, acquire: 60000, idle: 10000 }
-    });
-    // Retry connection up to 5 times
+    };
+
+    if (!dbUrl) {
+        sequelizeOpts.host = dbHost;
+        sequelizeOpts.port = dbPort;
+    }
+
+    global.database = dbUrl
+        ? new Sequelize(dbUrl, sequelizeOpts)
+        : new Sequelize(dbName, dbUser, dbPass, sequelizeOpts);
+
     for (let i = 0; i < 5; i++) {
         try {
             await global.database.authenticate();
-            console.log('[DB] Connected successfully.');
+            console.log("[DB] Connected successfully.");
             break;
         } catch (err) {
             console.error(`[DB] Connection attempt ${i+1} failed:`, err.message);
@@ -30,8 +39,6 @@ export default async () => {
             await global.database.query("ALTER TABLE users ADD COLUMN equipped_blook VARCHAR(255) DEFAULT 'Default.png'");
         }
     } catch (err) {
-        console.error('[DB] could not ensure equipped_blook column:', err.message || err);
+        console.error("[DB] could not ensure equipped_blook column:", err.message || err);
     }
 };
-// cache bust Tue Mar 10 08:52:06 PM EDT 2026
-// cache bust Tue Mar 10 08:54:13 PM EDT 2026
