@@ -10,7 +10,7 @@ export default async () => {
         port: dbPort,
         logging: global.config.verbose ? console.log : false,
         dialect: "mysql",
-        dialectOptions: {},  
+        dialectOptions: { ssl: { rejectUnauthorized: false } },
         pool: { max: 5, min: 0, acquire: 60000, idle: 10000 }
     });
     // Retry connection up to 5 times
