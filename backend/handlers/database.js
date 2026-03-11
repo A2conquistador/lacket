@@ -11,7 +11,7 @@ export default async () => {
         port: dbPort,
         logging: global.config.verbose ? console.log : false,
         dialect: "mysql",
-        dialectOptions: { socketPath: undefined },
+        dialectOptions: { ssl: { rejectUnauthorized: false } },
         pool: { max: 5, min: 0, acquire: 30000, idle: 10000 }
     });
 
