@@ -102,9 +102,9 @@ export default function Dashboard() {
   return (
     <div style={{display:'flex',height:'100vh',background:'#05071a',color:'#fff',fontFamily:'Nunito,sans-serif',overflow:'hidden'}}>
       <div style={{width:'175px',background:'linear-gradient(180deg,#0a0f2e 0%,#060918 100%)',borderRight:'1px solid rgba(99,102,241,0.15)',padding:'16px 12px',display:'flex',flexDirection:'column',overflowY:'auto',flexShrink:0}}>
-        <div style={{display:'flex',alignItems:'center',gap:'8px',marginBottom:'20px',paddingLeft:'4px'}}>
-          <div style={{width:'28px',height:'28px',background:'linear-gradient(135deg,#3b9eff,#6366f1)',borderRadius:'6px',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:'900',color:'white',fontSize:'14px'}}>L</div>
-          <div style={{fontSize:'18px',fontWeight:'900',background:'linear-gradient(135deg,#818cf8,#c7d2fe)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>Lacket</div>
+        <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'24px',paddingLeft:'4px'}}>
+          <div style={{width:'34px',height:'34px',background:'linear-gradient(135deg,#f59e0b,#ef4444)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:'900',color:'white',fontSize:'16px',boxShadow:'0 4px 12px rgba(245,158,11,0.4)'}}>L</div>
+          <div style={{fontSize:'20px',fontWeight:'900',fontFamily:"'Titan One',sans-serif",color:'#fff',letterSpacing:'-0.5px'}}>Lacket</div>
         </div>
 
         <div style={{background:'rgba(99,102,241,0.12)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'10px',padding:'10px',marginBottom:'8px',display:'flex',alignItems:'center',gap:'8px',cursor:'pointer',transition:'all 0.2s'}}>
@@ -152,32 +152,53 @@ export default function Dashboard() {
       </div>
 
       <div style={{flex:1,padding:'28px 32px',overflowY:'auto',background:'#05071a'}}>
-        {page==='profile'&&(<div style={{display:'grid',gridTemplateColumns:'340px 1fr',gap:'24px'}}>
-          <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'14px',padding:'28px',display:'flex',flexDirection:'column',alignItems:'center'}}>
-            <img src={`/content/blooks/${user.equipped_blook}${user.equipped_blook&&user.equipped_blook.includes('.')?'':'.png'}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'90px',height:'90px',marginBottom:'14px',objectFit:'contain'}} />
-            <h2 style={{fontSize:'18px',fontWeight:'800',marginBottom:'4px'}}>{user.username}</h2>
-            <p style={{fontSize:'12px',color:'rgba(255,255,255,0.3)',marginBottom:'16px'}}>Joined {new Date(user.created_at).toLocaleDateString()}</p>
-            <div style={{background:'rgba(245,158,11,0.15)',border:'1px solid rgba(245,158,11,0.3)',borderRadius:'10px',padding:'14px',width:'100%',textAlign:'center',marginBottom:'12px'}}>
-              <div style={{fontSize:'24px',fontWeight:'800',color:'#f59e0b'}}>{user.tokens?.toLocaleString()}</div>
-              <div style={{fontSize:'10px',color:'rgba(255,255,255,0.3)',textTransform:'uppercase',fontWeight:'700'}}>Tokens</div>
-            </div>
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px',width:'100%'}}>
-              <div style={{background:'rgba(99,102,241,0.08)',border:'1px solid rgba(99,102,241,0.15)',borderRadius:'10px',padding:'12px',textAlign:'center'}}>
-                <div style={{fontSize:'18px',fontWeight:'800',color:'#a5b4fc'}}>#{leaderboard.findIndex(u=>u.username===user.username)+1||'—'}</div>
-                <div style={{fontSize:'9px',color:'rgba(255,255,255,0.3)',textTransform:'uppercase',fontWeight:'700'}}>Rank</div>
+        {page==='profile'&&(<div>
+          <style>{`
+            @keyframes profileFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+            @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+          `}</style>
+          {/* Hero banner */}
+          <div style={{background:'linear-gradient(135deg,#1a0533,#0d1240,#051a40)',borderRadius:'20px',padding:'32px',marginBottom:'20px',position:'relative',overflow:'hidden',border:'1px solid rgba(99,102,241,0.25)'}}>
+            <div style={{position:'absolute',top:0,left:0,right:0,bottom:0,background:'radial-gradient(ellipse at 20% 50%,rgba(245,158,11,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(99,102,241,0.1) 0%,transparent 60%)',pointerEvents:'none'}} />
+            <div style={{display:'flex',alignItems:'center',gap:'28px',position:'relative'}}>
+              <div style={{position:'relative',flexShrink:0}}>
+                <div style={{width:'100px',height:'100px',background:'linear-gradient(135deg,#f59e0b22,#6366f122)',borderRadius:'20px',border:'2px solid rgba(245,158,11,0.4)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 0 40px rgba(245,158,11,0.15)'}}>
+                  <img src={`/content/blooks/${user.equipped_blook}${user.equipped_blook&&user.equipped_blook.includes('.')?'':'.png'}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'80px',height:'80px',objectFit:'contain',animation:'profileFloat 3s ease-in-out infinite'}} />
+                </div>
+                {user.role==='Dev'&&<div style={{position:'absolute',bottom:'-6px',right:'-6px',background:'linear-gradient(135deg,#f59e0b,#ef4444)',borderRadius:'6px',padding:'2px 8px',fontSize:'10px',fontWeight:'800',color:'#fff',boxShadow:'0 2px 8px rgba(245,158,11,0.5)'}}>DEV</div>}
               </div>
-              <div style={{background:'rgba(99,102,241,0.08)',border:'1px solid rgba(99,102,241,0.15)',borderRadius:'10px',padding:'12px',textAlign:'center'}}>
-                <div style={{fontSize:'18px',fontWeight:'800',color:'#a5b4fc'}}>{blooks.length}</div>
-                <div style={{fontSize:'9px',color:'rgba(255,255,255,0.3)',textTransform:'uppercase',fontWeight:'700'}}>Blooks</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:'28px',fontWeight:'900',fontFamily:"'Titan One',sans-serif",marginBottom:'4px',color:'#fff'}}>{user.username}</div>
+                <div style={{fontSize:'13px',color:'rgba(255,255,255,0.4)',marginBottom:'16px'}}>Member since {new Date(user.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long'})}</div>
+                <div style={{display:'flex',gap:'12px',flexWrap:'wrap'}}>
+                  <div style={{background:'rgba(245,158,11,0.15)',border:'1px solid rgba(245,158,11,0.35)',borderRadius:'12px',padding:'10px 18px',textAlign:'center'}}>
+                    <div style={{fontSize:'22px',fontWeight:'900',color:'#f59e0b',lineHeight:1}}>{user.tokens?.toLocaleString()}</div>
+                    <div style={{fontSize:'10px',color:'rgba(255,255,255,0.4)',textTransform:'uppercase',fontWeight:'700',marginTop:'3px'}}>🪙 Tokens</div>
+                  </div>
+                  <div style={{background:'rgba(99,102,241,0.15)',border:'1px solid rgba(99,102,241,0.35)',borderRadius:'12px',padding:'10px 18px',textAlign:'center'}}>
+                    <div style={{fontSize:'22px',fontWeight:'900',color:'#a5b4fc',lineHeight:1}}>#{leaderboard.findIndex(u=>u.username===user.username)+1||'—'}</div>
+                    <div style={{fontSize:'10px',color:'rgba(255,255,255,0.4)',textTransform:'uppercase',fontWeight:'700',marginTop:'3px'}}>🏆 Rank</div>
+                  </div>
+                  <div style={{background:'rgba(34,197,94,0.1)',border:'1px solid rgba(34,197,94,0.3)',borderRadius:'12px',padding:'10px 18px',textAlign:'center'}}>
+                    <div style={{fontSize:'22px',fontWeight:'900',color:'#22c55e',lineHeight:1}}>{blooks.length}</div>
+                    <div style={{fontSize:'10px',color:'rgba(255,255,255,0.4)',textTransform:'uppercase',fontWeight:'700',marginTop:'3px'}}>🃏 Blooks</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'14px',padding:'28px'}}>
-            <div style={{fontSize:'12px',color:'rgba(255,255,255,0.3)',textTransform:'uppercase',fontWeight:'700',letterSpacing:'0.8px',marginBottom:'16px'}}>Block Showcase</div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'12px'}}>
-              {blooks.slice(0,5).map((b,i)=>(<div key={i} style={{background:'rgba(99,102,241,0.08)',border:'1px solid rgba(99,102,241,0.15)',borderRadius:'10px',padding:'12px',textAlign:'center'}}><img src={`/content/blooks/${b.blook_name.endsWith(".png")||b.blook_name.endsWith(".gif")?b.blook_name:b.blook_name+".png"}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'60px',height:'60px',marginBottom:'8px',objectFit:'contain'}} /><div style={{fontSize:'11px',color:'#e0e7ff',fontWeight:'600'}}>{b.blook_name.replace(/\.(png|gif)/,'')}</div></div>))}
+          {/* Blook Showcase */}
+          <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'16px',padding:'24px'}}>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+              <div style={{fontSize:'14px',fontWeight:'800',color:'#e0e7ff',letterSpacing:'0.5px'}}>✨ Blook Showcase</div>
+              <button onClick={()=>setPage('blooks')} style={{background:'none',border:'none',color:'rgba(99,102,241,0.7)',fontSize:'12px',fontWeight:'700',cursor:'pointer',padding:0}}>View all →</button>
             </div>
+            {blooks.length===0
+              ?<div style={{textAlign:'center',padding:'32px',color:'rgba(255,255,255,0.2)',fontSize:'14px'}}>No blooks yet! Head to the Market to open some packs.</div>
+              :<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(110px,1fr))',gap:'12px'}}>
+                {blooks.slice(0,10).map((b,i)=>{const RCOLORS={'Common':'#9ca3af','Uncommon':'#22c55e','Rare':'#3b9eff','Epic':'#a855f7','Legendary':'#f59e0b','Mythic':'#ef4444','Chroma':'#ec4899'};const c=RCOLORS[b.rarity]||'#6366f1';return(<div key={i} style={{background:`linear-gradient(135deg,${c}18,${c}08)`,border:`1px solid ${c}44`,borderRadius:'12px',padding:'14px',textAlign:'center'}}><img src={`/content/blooks/${b.blook_name.endsWith(".png")||b.blook_name.endsWith(".gif")?b.blook_name:b.blook_name+".png"}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'55px',height:'55px',marginBottom:'8px',objectFit:'contain'}} /><div style={{fontSize:'11px',color:'#e0e7ff',fontWeight:'700',marginBottom:'3px'}}>{b.blook_name.replace(/\.(png|gif)/,'')}</div><div style={{fontSize:'9px',color:c,fontWeight:'700',textTransform:'uppercase'}}>{b.rarity}</div></div>);})}
+              </div>
+            }
           </div>
         </div>)}
 
@@ -235,7 +256,23 @@ export default function Dashboard() {
           </div>
         </div>)}
 
-        {page==='leaderboard'&&(<div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px'}}>Leaderboard</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Top players</p><div style={{display:'flex',flexDirection:'column',gap:'10px'}}>{leaderboard.slice(0,20).map((u,i)=>(<div key={i} style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'12px',padding:'14px',display:'flex',alignItems:'center',gap:'12px'}}><div style={{fontSize:'18px',fontWeight:'800',color:i===0?'#f59e0b':i===1?'#c0c0c0':'#cd7f32'}}>#{i+1}</div><img src={`/content/blooks/${u.equipped_blook}${u.equipped_blook&&u.equipped_blook.includes('.')?'':'.png'}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'40px',height:'40px',borderRadius:'8px',objectFit:'contain'}} /><div style={{flex:1}}><div style={{fontWeight:'700'}}>{u.username}</div></div><div style={{fontSize:'14px',fontWeight:'800',color:'#f59e0b'}}>🪙 {u.tokens?.toLocaleString()}</div></div>))}</div></div>)}
+        {page==='leaderboard'&&(<div>
+          <h1 style={{fontSize:'26px',fontWeight:'900',marginBottom:'4px',fontFamily:"'Titan One',sans-serif"}}>Leaderboard</h1>
+          <p style={{color:'rgba(255,255,255,0.4)',marginBottom:'20px'}}>Top Lacket players</p>
+          <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+            {leaderboard.slice(0,20).map((u,i)=>{
+              const medals=['🥇','🥈','🥉'];
+              const topColors=['linear-gradient(135deg,#f59e0b22,#0d1240)','linear-gradient(135deg,#c0c0c022,#0d1240)','linear-gradient(135deg,#cd7f3222,#0d1240)'];
+              const topBorders=['rgba(245,158,11,0.4)','rgba(192,192,192,0.3)','rgba(205,127,50,0.3)'];
+              return(<div key={i} onClick={()=>window.open(`/u/${u.username}`,'_blank')} style={{background:i<3?topColors[i]:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:`1px solid ${i<3?topBorders[i]:'rgba(99,102,241,0.15)'}`,borderRadius:'12px',padding:'12px 16px',display:'flex',alignItems:'center',gap:'14px',cursor:'pointer',transition:'all 0.15s'}}>
+                <div style={{width:'32px',textAlign:'center',fontSize:i<3?'22px':'15px',fontWeight:'900',color:i===0?'#f59e0b':i===1?'#c0c0c0':i===2?'#cd7f32':'rgba(255,255,255,0.3)',fontFamily:"'Titan One',sans-serif"}}>{i<3?medals[i]:`#${i+1}`}</div>
+                <img src={`/content/blooks/${u.equipped_blook}${u.equipped_blook&&u.equipped_blook.includes('.')?'':'.png'}`} onError={(e)=>{e.target.src='/content/blooks/Default.png'}} style={{width:'38px',height:'38px',borderRadius:'8px',objectFit:'contain'}} />
+                <div style={{flex:1,fontWeight:'700',fontSize:'14px'}}>{u.username}</div>
+                <div style={{fontSize:'14px',fontWeight:'800',color:'#f59e0b'}}>🪙 {u.tokens?.toLocaleString()}</div>
+              </div>);
+            })}
+          </div>
+        </div>)}
 
         {page==='settings'&&(<div>
           <h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'20px'}}>Settings</h1>
@@ -264,7 +301,25 @@ export default function Dashboard() {
           </div>
         </div>)}
 
-        {page==='play'&&(<div style={{textAlign:'center',paddingTop:'60px'}}><div style={{fontSize:'64px',marginBottom:'16px'}}>🎮</div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px',fontFamily:"'Titan One',sans-serif"}}>Play</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'24px'}}>Play trivia games with friends!</p><button onClick={()=>navigate('/play')} style={{background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'12px',color:'#fff',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',padding:'14px 32px',cursor:'pointer',marginRight:'12px'}}>Browse Modes</button><button onClick={()=>navigate('/game')} style={{background:'rgba(99,102,241,0.1)',border:'1px solid rgba(99,102,241,0.3)',borderRadius:'12px',color:'#a5b4fc',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',padding:'14px 32px',cursor:'pointer'}}>Quick Play</button></div>)}
+        {page==='play'&&(<div>
+          <h1 style={{fontSize:'26px',fontWeight:'900',marginBottom:'4px',fontFamily:"'Titan One',sans-serif"}}>Play</h1>
+          <p style={{color:'rgba(255,255,255,0.4)',marginBottom:'24px'}}>Jump into a game mode</p>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'16px'}}>
+            {[
+              {icon:'🎮',label:'Host a Game',desc:'Create a room and invite friends to play',color:'#6366f1',action:()=>navigate('/game')},
+              {icon:'🔗',label:'Join Game',desc:'Enter a game code to join someone else',color:'#22c55e',action:()=>navigate('/play')},
+              {icon:'⚡',label:'Quick Play',desc:'Jump into a random game instantly',color:'#f59e0b',action:()=>navigate('/game')},
+              {icon:'📚',label:'My Sets',desc:'Practice with your own question sets',color:'#ec4899',action:()=>setPage('sets')},
+            ].map((m,i)=>(
+              <div key={i} onClick={m.action} style={{background:`linear-gradient(135deg,${m.color}20,${m.color}08)`,border:`1px solid ${m.color}44`,borderRadius:'16px',padding:'28px',cursor:'pointer',transition:'all 0.2s',textAlign:'center'}}>
+                <div style={{fontSize:'48px',marginBottom:'14px'}}>{m.icon}</div>
+                <div style={{fontSize:'16px',fontWeight:'800',marginBottom:'6px',color:'#fff'}}>{m.label}</div>
+                <div style={{fontSize:'12px',color:'rgba(255,255,255,0.4)',marginBottom:'18px'}}>{m.desc}</div>
+                <div style={{background:m.color,borderRadius:'8px',padding:'8px',fontSize:'13px',fontWeight:'700',color:'#fff'}}>Let's Go →</div>
+              </div>
+            ))}
+          </div>
+        </div>)}
 
         {page==='sets'&&(<div>
           <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'20px'}}>
@@ -305,7 +360,16 @@ export default function Dashboard() {
           </div>
         </div>)}
 
-        {page==='chat'&&(<div style={{textAlign:'center',paddingTop:'60px'}}><div style={{fontSize:'64px',marginBottom:'16px'}}>💬</div><h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px',fontFamily:"'Titan One',sans-serif"}}>Chat</h1><p style={{color:'rgba(255,255,255,0.4)',marginBottom:'24px'}}>Chat with other players!</p><button onClick={()=>navigate('/chat')} style={{background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'12px',color:'#fff',fontFamily:'Nunito,sans-serif',fontSize:'16px',fontWeight:'700',padding:'14px 32px',cursor:'pointer'}}>Open Chat</button></div>)}
+        {page==='chat'&&(<div>
+          <h1 style={{fontSize:'26px',fontWeight:'900',marginBottom:'4px',fontFamily:"'Titan One',sans-serif"}}>Chat</h1>
+          <p style={{color:'rgba(255,255,255,0.4)',marginBottom:'24px'}}>Talk with the Lacket community</p>
+          <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'20px',padding:'48px',textAlign:'center',maxWidth:'500px'}}>
+            <div style={{fontSize:'72px',marginBottom:'16px',filter:'drop-shadow(0 0 20px rgba(99,102,241,0.5))'}}>💬</div>
+            <div style={{fontSize:'20px',fontWeight:'800',marginBottom:'8px',color:'#e0e7ff'}}>Global Chat</div>
+            <div style={{fontSize:'14px',color:'rgba(255,255,255,0.4)',marginBottom:'24px',lineHeight:'1.6'}}>Chat with all Lacket players in real time. Share tips, make friends, and talk about your best blooks!</div>
+            <button onClick={()=>navigate('/chat')} style={{background:'linear-gradient(135deg,#6366f1,#8b5cf6)',border:'none',borderRadius:'12px',color:'#fff',fontFamily:'Nunito,sans-serif',fontSize:'15px',fontWeight:'700',padding:'13px 32px',cursor:'pointer',boxShadow:'0 4px 20px rgba(99,102,241,0.4)'}}>Open Chat →</button>
+          </div>
+        </div>)}
 
         {page==='friends'&&(<div>
           <h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'8px',fontFamily:"'Titan One',sans-serif"}}>Friends</h1>
