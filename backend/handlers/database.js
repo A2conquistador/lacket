@@ -33,3 +33,4 @@ export default async () => {
         console.error('[DB] could not ensure equipped_blook column:', err.message || err);
     }
 };
+// cache bust Tue Mar 10 08:52:06 PM EDT 2026
