@@ -16,7 +16,8 @@ await (await import("./handlers/database.js")).default();
 await (await import("./handlers/middlewares.js")).default(app);
 await (await import("./handlers/endpoints.js")).default(app);
 await (await import("./handlers/frontend.js")).default(app);
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 const server = createServer(app);

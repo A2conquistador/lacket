@@ -3,7 +3,7 @@ export default async (app) => {
         if (!file.endsWith(".js")) continue;
         let endpoint; try { endpoint = (await import(file)).default; } catch(e) { console.error('[IMPORT ERROR]', file, e.message); continue; }
         if (!endpoint) { console.error('[NO DEFAULT]', file); continue; }
-        const path = "/" + file.replace("endpoints", "api").slice(0, -3);
+        const path = "/api/" + file.split("endpoints/")[1].slice(0, -3);
         const method = (endpoint.method || endpoint.type || "get").toLowerCase();
         const handler = endpoint.handler || endpoint.run;
         if (!handler) continue;

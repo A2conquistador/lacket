@@ -7,12 +7,12 @@ export default async (req, res, next) => {
         });
         if (user.length == 0) return next();
         req.user = user[0];
-        if (req.user.banned && req.path.startsWith('/api')) {
-            return res.status(403).json({ error: 'Your account has been banned.' });
+        if (req.user.banned && req.path.startsWith("/api")) {
+            return res.status(403).json({ error: "Your account has been banned." });
         }
         next();
     } catch (err) {
-        console.error('[USER MIDDLEWARE ERROR]', err.message);
+        console.error("[USER MIDDLEWARE ERROR]", err.message);
         next();
     }
 }
