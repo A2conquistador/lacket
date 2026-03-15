@@ -10,7 +10,7 @@ export default async () => {
     let sequelizeOpts = {
         logging: global.config.verbose ? console.log : false,
         dialect: "mysql",
-        dialectOptions: { ssl: false },
+        dialectOptions: { ssl: false, socketPath: '/var/run/mysqld/mysqld.sock' },
         pool: { max: 5, min: 0, acquire: 60000, idle: 10000 }
     };
 

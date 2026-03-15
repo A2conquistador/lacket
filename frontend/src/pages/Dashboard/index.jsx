@@ -1,4 +1,6 @@
 import DevPanel from './DevPanel';
+import OwnerPanel from './OwnerPanel';
+import CreatorPanel from './CreatorPanel';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -99,9 +101,19 @@ export default function Dashboard() {
     </button>
   );
 
+  const themeBg = localStorage.getItem('lacket_theme_bg')||'#05071a';
+  const themeSidebar = localStorage.getItem('lacket_theme_sidebar')||'#0a0f2e';
+  const themeAccent = localStorage.getItem('lacket_theme_accent')||'#6366f1';
+  const themeCard = localStorage.getItem('lacket_theme_bg') ? localStorage.getItem('lacket_theme_bg').replace(')', ',0.6)').replace('rgb','rgba') : '#0d1240';
+
   return (
-    <div style={{display:'flex',height:'100vh',background:'#05071a',color:'#fff',fontFamily:'Nunito,sans-serif',overflow:'hidden'}}>
-      <div style={{width:'175px',background:'linear-gradient(180deg,#0a0f2e 0%,#060918 100%)',borderRight:'1px solid rgba(99,102,241,0.15)',padding:'16px 12px',display:'flex',flexDirection:'column',overflowY:'auto',flexShrink:0}}>
+    <>
+    <style>{`
+      body { background: ${themeBg} !important; }
+      .theme-card { background: linear-gradient(135deg, ${themeAccent}22, ${themeAccent}08) !important; border-color: ${themeAccent}44 !important; }
+    `}</style>
+    <div style={{display:'flex',height:'100vh',background:localStorage.getItem('lacket_theme_bg')||'#05071a',color:'#fff',fontFamily:'Nunito,sans-serif',overflow:'hidden'}}>
+      <div style={{width:'175px',background:localStorage.getItem('lacket_theme_sidebar')||'linear-gradient(180deg,#0a0f2e 0%,#060918 100%)',borderRight:'1px solid rgba(99,102,241,0.15)',padding:'16px 12px',display:'flex',flexDirection:'column',overflowY:'auto',flexShrink:0}}>
         <div style={{display:'flex',alignItems:'center',gap:'10px',marginBottom:'24px',paddingLeft:'4px'}}>
           <div style={{width:'34px',height:'34px',background:'linear-gradient(135deg,#f59e0b,#ef4444)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:'900',color:'white',fontSize:'16px',boxShadow:'0 4px 12px rgba(245,158,11,0.4)'}}>L</div>
           <div style={{fontSize:'20px',fontWeight:'900',fontFamily:"'Titan One',sans-serif",color:'#fff',letterSpacing:'-0.5px'}}>Lacket</div>
@@ -145,13 +157,15 @@ export default function Dashboard() {
           <NavBtn id="friends" icon="👥" label="Friends" />
           <NavBtn id="leaderboard" icon="🏆" label="Leaderboard" />
           <NavBtn id="settings" icon="⚙️" label="Settings" />
-          {user.role==='Dev'&&<NavBtn id="devpanel" icon="🛠️" label="Dev Panel" />}
+          {(user.role==='Dev'||user.role==='Owner')&&<NavBtn id="devpanel" icon="🛠️" label="Dev Panel" />}
+          {user.role==='Owner'&&<NavBtn id="ownerpanel" icon="👑" label="Owner Panel" />}
+          {(user.role==='God'||user.role==='Creator')&&<NavBtn id="creatorpanel" icon="⚡" label="Creator Panel" />}
         </nav>
 
         <button onClick={() => {localStorage.removeItem('token');navigate('/');}} style={{width:'100%',padding:'11px',background:'rgba(239,68,68,0.1)',border:'1px solid rgba(239,68,68,0.2)',color:'#f87171',cursor:'pointer',borderRadius:'8px',fontWeight:'600',fontSize:'13px',marginTop:'12px'}}>Logout</button>
       </div>
 
-      <div style={{flex:1,padding:'28px 32px',overflowY:'auto',background:'#05071a'}}>
+      <div style={{flex:1,padding:'28px 32px',overflowY:'auto',background:localStorage.getItem('lacket_theme_bg')||'#05071a'}}>
         {page==='profile'&&(<div>
           <style>{`
             @keyframes profileFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -275,28 +289,55 @@ export default function Dashboard() {
         </div>)}
 
         {page==='settings'&&(<div>
-          <h1 style={{fontSize:'26px',fontWeight:'800',marginBottom:'20px'}}>Settings</h1>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'16px',maxWidth:'760px'}}>
-            <div style={{background:'#1a1d35',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'20px'}}>
-              <div style={{fontWeight:'800',fontSize:'16px',marginBottom:'14px',display:'flex',alignItems:'center',gap:'8px'}}>👤 Profile</div>
-              <div style={{fontSize:'14px',color:'rgba(255,255,255,0.7)',marginBottom:'6px'}}>Username: <strong style={{color:'#fff'}}>{user.username}</strong></div>
-              <div style={{fontSize:'14px',color:'rgba(255,255,255,0.7)',marginBottom:'6px'}}>Role: <strong style={{color:'#a5b4fc'}}>{user.role||'User'}</strong></div>
-              <div style={{fontSize:'14px',color:'rgba(255,255,255,0.7)'}}>Joined: <strong style={{color:'#fff'}}>{new Date(user.created_at).toLocaleDateString()}</strong></div>
+          <h1 style={{fontFamily:"'Titan One',sans-serif",fontSize:'28px',fontWeight:'900',marginBottom:'4px'}}>Settings</h1>
+          <p style={{color:'rgba(255,255,255,0.4)',marginBottom:'24px'}}>Customize your Lacket experience</p>
+          <div style={{display:'flex',flexDirection:'column',gap:'16px',maxWidth:'860px'}}>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'16px'}}>
+              <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'16px',padding:'20px'}}>
+                <div style={{fontWeight:'800',fontSize:'14px',marginBottom:'14px',color:'#a5b4fc',textTransform:'uppercase',letterSpacing:'1px'}}>👤 Profile</div>
+                <div style={{fontSize:'13px',color:'rgba(255,255,255,0.5)',marginBottom:'4px'}}>Username</div>
+                <div style={{fontSize:'16px',fontWeight:'800',color:'#fff',marginBottom:'12px'}}>{user.username}</div>
+                <div style={{fontSize:'13px',color:'rgba(255,255,255,0.5)',marginBottom:'4px'}}>Role</div>
+                <div style={{fontSize:'14px',fontWeight:'700',color:'#a5b4fc',marginBottom:'12px'}}>{user.role||'Player'}</div>
+                <div style={{fontSize:'13px',color:'rgba(255,255,255,0.5)',marginBottom:'4px'}}>Joined</div>
+                <div style={{fontSize:'13px',fontWeight:'700',color:'#fff'}}>{new Date(user.created_at).toLocaleDateString()}</div>
+              </div>
+              <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'16px',padding:'20px'}}>
+                <div style={{fontWeight:'800',fontSize:'14px',marginBottom:'14px',color:'#a5b4fc',textTransform:'uppercase',letterSpacing:'1px'}}>✏️ Edit Info</div>
+                <button onClick={()=>{const u=prompt('New username:');if(u)axios.post('/api/users/change-username',{username:u},{headers:{authorization:token}}).then(()=>loadData()).catch(e=>alert(e?.response?.data?.error||'Error'));}} style={{width:'100%',background:'rgba(99,102,241,0.1)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'8px',color:'#a5b4fc',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'9px',cursor:'pointer',marginBottom:'8px'}}>✏️ Change Username</button>
+                <button onClick={()=>{const p=prompt('New password:');if(p)axios.post('/api/users/change-password',{password:p},{headers:{authorization:token}}).then(()=>alert('Password changed!')).catch(e=>alert(e?.response?.data?.error||'Error'));}} style={{width:'100%',background:'rgba(99,102,241,0.1)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'8px',color:'#a5b4fc',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'9px',cursor:'pointer',marginBottom:'8px'}}>🔒 Change Password</button>
+                <button onClick={()=>navigate('/daily')} style={{width:'100%',background:'rgba(245,158,11,0.1)',border:'1px solid rgba(245,158,11,0.3)',borderRadius:'8px',color:'#f59e0b',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'9px',cursor:'pointer'}}>📅 Daily Reward</button>
+              </div>
+              <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'16px',padding:'20px'}}>
+                <div style={{fontWeight:'800',fontSize:'14px',marginBottom:'14px',color:'#a5b4fc',textTransform:'uppercase',letterSpacing:'1px'}}>⚙️ General</div>
+                <div style={{fontSize:'13px',color:'rgba(255,255,255,0.5)',marginBottom:'4px'}}>Tokens</div>
+                <div style={{fontSize:'20px',fontWeight:'900',color:'#f59e0b',marginBottom:'16px'}}>🪙 {user.tokens?.toLocaleString()}</div>
+                <button onClick={()=>navigate('/chat')} style={{width:'100%',background:'rgba(99,102,241,0.1)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'8px',color:'#a5b4fc',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'9px',cursor:'pointer',marginBottom:'8px'}}>💬 Open Chat</button>
+                <button onClick={()=>{if(window.confirm('Log out?')){localStorage.removeItem('token');navigate('/login');}}} style={{width:'100%',background:'rgba(239,68,68,0.1)',border:'1px solid rgba(239,68,68,0.2)',borderRadius:'8px',color:'#f87171',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'9px',cursor:'pointer'}}>🚪 Log Out</button>
+              </div>
             </div>
-            <div style={{background:'#1a1d35',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'20px'}}>
-              <div style={{fontWeight:'800',fontSize:'16px',marginBottom:'14px',display:'flex',alignItems:'center',gap:'8px'}}>📋 Account</div>
-              <div style={{fontSize:'14px',color:'rgba(255,255,255,0.7)',marginBottom:'6px'}}>Tokens: <strong style={{color:'#f59e0b'}}>🪙 {user.tokens?.toLocaleString()}</strong></div>
-              <button onClick={()=>navigate('/daily')} style={{marginTop:'10px',background:'rgba(245,158,11,0.15)',border:'1px solid rgba(245,158,11,0.3)',borderRadius:'8px',color:'#f59e0b',fontFamily:'Nunito,sans-serif',fontSize:'13px',fontWeight:'700',padding:'7px 14px',cursor:'pointer'}}>📅 Daily Reward</button>
-            </div>
-            <div style={{background:'#1a1d35',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'20px'}}>
-              <div style={{fontWeight:'800',fontSize:'16px',marginBottom:'14px',display:'flex',alignItems:'center',gap:'8px'}}>✏️ Edit Info</div>
-              <div style={{fontSize:'14px',color:'rgba(99,102,241,0.8)',cursor:'pointer',marginBottom:'8px',textDecoration:'underline'}} onClick={()=>{const u=prompt('New username:');if(u)axios.post('/api/users/change-username',{username:u},{headers:{authorization:token}}).then(()=>loadData()).catch(e=>alert(e?.response?.data?.error||'Error'));}}>Change Username</div>
-              <div style={{fontSize:'14px',color:'rgba(99,102,241,0.8)',cursor:'pointer',textDecoration:'underline'}} onClick={()=>{const p=prompt('New password:');if(p)axios.post('/api/users/change-password',{password:p},{headers:{authorization:token}}).then(()=>alert('Password changed!')).catch(e=>alert(e?.response?.data?.error||'Error'));}}>Change Password</div>
-            </div>
-            <div style={{background:'#1a1d35',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'20px'}}>
-              <div style={{fontWeight:'800',fontSize:'16px',marginBottom:'14px',display:'flex',alignItems:'center',gap:'8px'}}>⚙️ General</div>
-              <div style={{fontSize:'14px',color:'rgba(99,102,241,0.8)',cursor:'pointer',marginBottom:'8px',textDecoration:'underline'}} onClick={()=>navigate('/chat')}>💬 Open Chat</div>
-              <div style={{fontSize:'14px',color:'rgba(239,68,68,0.8)',cursor:'pointer',textDecoration:'underline'}} onClick={()=>{if(window.confirm('Log out?')){localStorage.removeItem('token');navigate('/login');}}}>🚪 Log Out</div>
+            <div style={{background:'linear-gradient(135deg,#0d1240,#0a0f2e)',border:'1px solid rgba(99,102,241,0.2)',borderRadius:'16px',padding:'24px'}}>
+              <div style={{fontWeight:'800',fontSize:'14px',marginBottom:'16px',color:'#a5b4fc',textTransform:'uppercase',letterSpacing:'1px'}}>🎨 Theme</div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'10px'}}>
+                {[
+                  {id:'dark',name:'Dark',emoji:'🌙',bg:'#05071a',sidebar:'#0a0f2e',accent:'#6366f1'},
+                  {id:'amoled',name:'AMOLED',emoji:'⚫',bg:'#000000',sidebar:'#050505',accent:'#6366f1'},
+                  {id:'light',name:'Light',emoji:'☀️',bg:'#e8eaf6',sidebar:'#c5cae9',accent:'#6366f1'},
+                  {id:'red',name:'Red',emoji:'🔴',bg:'#0f0505',sidebar:'#1a0808',accent:'#ef4444'},
+                  {id:'green',name:'Green',emoji:'🟢',bg:'#050f05',sidebar:'#081a08',accent:'#22c55e'},
+                  {id:'pink',name:'Pink',emoji:'🩷',bg:'#0f050a',sidebar:'#1a0810',accent:'#ec4899'},
+                  {id:'gold',name:'Gold',emoji:'🟡',bg:'#0f0a00',sidebar:'#1a1200',accent:'#f59e0b'},
+                  {id:'cyan',name:'Cyan',emoji:'🩵',bg:'#00080f',sidebar:'#001020',accent:'#06b6d4'},
+                ].map(t=>{
+                  const current=localStorage.getItem('lacket_theme')||'dark';
+                  const isActive=current===t.id;
+                  return(<div key={t.id} onClick={()=>{localStorage.setItem('lacket_theme',t.id);localStorage.setItem('lacket_theme_bg',t.bg);localStorage.setItem('lacket_theme_sidebar',t.sidebar);localStorage.setItem('lacket_theme_accent',t.accent);window.location.reload();}} style={{background:t.bg,border:'2px solid '+(isActive?t.accent:'rgba(255,255,255,0.08)'),borderRadius:'12px',padding:'14px',textAlign:'center',cursor:'pointer',position:'relative'}}>
+                    {isActive&&<div style={{position:'absolute',top:'6px',right:'6px',background:t.accent,borderRadius:'50%',width:'10px',height:'10px'}}/>}
+                    <div style={{fontSize:'24px',marginBottom:'6px'}}>{t.emoji}</div>
+                    <div style={{fontSize:'12px',fontWeight:'700',color:isActive?t.accent:'rgba(255,255,255,0.5)'}}>{t.name}</div>
+                  </div>);
+                })}
+              </div>
             </div>
           </div>
         </div>)}
@@ -384,8 +425,11 @@ export default function Dashboard() {
           {friends.length===0&&<div style={{color:'rgba(255,255,255,0.2)',fontSize:'14px'}}>No friends yet. Add some!</div>}
         </div>)}
 
-        {page==='devpanel'&&user?.role==='Dev'&&(<DevPanel user={user} />)}
+        {page==='devpanel'&&(user?.role==='Dev'||user?.role==='Owner')&&(<DevPanel user={user} />)}
+        {page==='ownerpanel'&&user?.role==='Owner'&&(<OwnerPanel user={user} />)}
+        {page==='creatorpanel'&&(user?.role==='God'||user?.role==='Creator')&&(<CreatorPanel user={user} />)}
       </div>
     </div>
+    </>
   );
 }

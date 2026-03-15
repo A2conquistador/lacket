@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const ROLES = ['Player','VIP','Moderator','Admin','Dev'];
-const ROLE_COLORS = { Player:'#9ca3af', VIP:'#f59e0b', Moderator:'#22c55e', Admin:'#3b82f6', Dev:'#ec4899' };
+const ROLES = ['Player','BetaTester','VIP','Moderator','Admin','Dev','Owner','God','Creator'];
+const ROLE_COLORS = { Player:'#9ca3af', BetaTester:'#06b6d4', VIP:'#f59e0b', Moderator:'#22c55e', Admin:'#3b82f6', Dev:'#ec4899', Owner:'#f43f5e' };
 
 export default function DevPanel({ user }) {
     const [users, setUsers] = useState([]);

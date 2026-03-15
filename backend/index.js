@@ -23,6 +23,7 @@ app.get('*', (req, res, next) => {
 const server = createServer(app);
 import { WebSocketServer } from 'ws';
 const wss = new WebSocketServer({ server });
+global.wss = wss;
 setupGame(wss);
 setupChat(wss);
 server.listen(global.config.port, () => {

@@ -1,6 +1,6 @@
 {
-  "_vendor.052f07ed.js": {
-    "file": "vendor.052f07ed.js",
+  "_vendor.d78d5706.js": {
+    "file": "vendor.d78d5706.js",
     "imports": [
       "index.html"
     ]
@@ -13,9 +13,9 @@
     "css": [
       "index.ae22a27f.css"
     ],
-    "file": "index.825fd1f5.js",
+    "file": "index.3f671b97.js",
     "imports": [
-      "_vendor.052f07ed.js",
+      "_vendor.d78d5706.js",
       "index.html"
     ],
     "isEntry": true,
